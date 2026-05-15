@@ -1,37 +1,87 @@
-import cookieParser from "cookie-parser"
-import cors from "cors"
-import dotenv from "dotenv"
-import express from "express"
-import morgan from "morgan"
-import { errorHandler, routeNotFound } from "./middlewares/errorMiddleware.js"
-import { dbConnection } from "./utils/index.js"
-import routes from "./routes/index.js"
+// import cookieParser from "cookie-parser"
+// import cors from "cors"
+// import dotenv from "dotenv"
+// import express from "express"
+// import morgan from "morgan"
+// import { errorHandler, routeNotFound } from "./middlewares/errorMiddleware.js"
+// import { dbConnection } from "./utils/index.js"
+// import routes from "./routes/index.js"
 
-dotenv.config()
+// dotenv.config()
 
-dbConnection()
+// dbConnection()
 
-const PORT = process.env.PORT || 5000
+// const PORT = process.env.PORT || 5000
 
-const app = express()
+// const app = express()
+
+// app.use(
+//     cors({
+//         origin: ["https://task-manager-abhi.netlify.app", "http://localhost:3000", "http://localhost:3001"],
+//         methods: ["GET", "POST", "DELETE", "PUT"],
+//         credentials: true,
+//     })
+// )
+
+// app.use(express.json())
+// app.use(express.urlencoded({ extended: true }))
+
+// app.use(cookieParser())
+
+// app.use(morgan("dev"))
+// app.use("/api", routes)
+
+// app.use(routeNotFound)
+// app.use(errorHandler)
+
+// app.listen(PORT, () => console.log(`Server listening on ${PORT}`))
+
+
+javascript
+import cookieParser from "cookie-parser";
+import cors from "cors";
+import dotenv from "dotenv";
+import express from "express";
+import morgan from "morgan";
+
+import { errorHandler, routeNotFound } from "./middlewares/errorMiddleware.js";
+import { dbConnection } from "./utils/index.js";
+import routes from "./routes/index.js";
+
+dotenv.config();
+
+dbConnection();
+
+const PORT = process.env.PORT || 5000;
+
+const app = express();
 
 app.use(
-    cors({
-        origin: ["https://task-manager-abhi.netlify.app", "http://localhost:3000", "http://localhost:3001"],
-        methods: ["GET", "POST", "DELETE", "PUT"],
-        credentials: true,
-    })
-)
+  cors({
+    origin: [
+      "https://task-manager-abhi.netlify.app",
+      "http://localhost:3000",
+      "http://localhost:3001",
+      "https://taskzen-task-manager-production-c5d2.up.railway.app",
+    ],
+    methods: ["GET", "POST", "DELETE", "PUT"],
+    credentials: true,
+  })
+);
 
-app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-app.use(cookieParser())
+app.use(cookieParser());
 
-app.use(morgan("dev"))
-app.use("/api", routes)
+app.use(morgan("dev"));
 
-app.use(routeNotFound)
-app.use(errorHandler)
+app.use("/api", routes);
 
-app.listen(PORT, () => console.log(`Server listening on ${PORT}`))
+app.use(routeNotFound);
+app.use(errorHandler);
+
+app.listen(PORT, () => {
+  console.log(`Server listening on ${PORT}`);
+});
+

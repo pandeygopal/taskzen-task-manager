@@ -1,3 +1,4 @@
+javascript
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import dotenv from "dotenv";
@@ -16,8 +17,12 @@ const PORT = process.env.PORT || 5000;
 
 const app = express();
 
-// Allow all frontend origins temporarily
-app.use(cors());
+app.use(
+  cors({
+    origin: "https://taskzen-task-manager-production-c5d2.up.railway.app",
+    credentials: true,
+  })
+);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
